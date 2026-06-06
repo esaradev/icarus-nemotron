@@ -1,0 +1,5 @@
+name: nemotron-local-provider
+kind: model-provider
+version: 0.1.0
+description: Self-hosted NVIDIA Nemotron via an OpenAI-compatible vLLM endpoint
+author: esaradev

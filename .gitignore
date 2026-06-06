@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+.DS_Store
+nano_v3_reasoning_parser.py
