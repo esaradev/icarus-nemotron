@@ -1,7 +1,6 @@
 name: icarus_nemotron
 version: 0.1.0
 description: Self-memory and output tuning for Nemotron-backed Hermes agents.
-author: esaradev
 provides_tools:
   - mem_recall
   - mem_write
