@@ -15,6 +15,13 @@ if [[ -z "${HF_HOME:-}" && -d /workspace ]]; then
   echo "HF_HOME defaulted to $HF_HOME (model cache on the large volume)"
 fi
 
+# Prefer a persistent vLLM in /workspace/venv (survives container restarts) over
+# a system-disk install that gets wiped on restart.
+VLLM_BIN="vllm"
+if [[ -x /workspace/venv/bin/vllm ]]; then
+  VLLM_BIN=/workspace/venv/bin/vllm
+fi
+
 # The reasoning-parser plugin ships in the NVIDIA model repo. If it's not next to
 # this script, fetch it from the model card before serving (see README).
 if [[ ! -f "$PARSER_PLUGIN" ]]; then
@@ -23,7 +30,7 @@ if [[ ! -f "$PARSER_PLUGIN" ]]; then
   echo "to serve without reasoning parsing (tool calls may be less reliable)."
 fi
 
-exec vllm serve "$MODEL" \
+exec "$VLLM_BIN" serve "$MODEL" \
   --port "$PORT" \
   --max-model-len "$MAX_LEN" \
   --trust-remote-code \
