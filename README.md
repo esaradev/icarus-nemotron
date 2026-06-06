@@ -68,7 +68,7 @@ calls are less reliable.
 If the GPU is remote, forward its port to your machine so `localhost:8000` reaches it:
 
 ```bash
-ssh -i ~/.ssh/runpod_ed25519 -L 8000:localhost:8000 <pod> -N
+ssh -i ~/.ssh/id_ed25519 -L 8000:localhost:8000 <pod> -N
 ```
 
 ## Point Hermes at it

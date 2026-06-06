@@ -8,7 +8,7 @@ Bearer auth and a fixed cloud base_url.
 Endpoint comes from NEMOTRON_BASE_URL (default http://localhost:8000/v1). For a
 remote pod, SSH-forward the pod's vLLM port to localhost first:
 
-    ssh -i ~/.ssh/runpod_ed25519 -L 8000:localhost:8000 <pod> -N
+    ssh -i ~/.ssh/id_ed25519 -L 8000:localhost:8000 <pod> -N
 """
 
 import os
