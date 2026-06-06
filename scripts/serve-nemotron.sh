@@ -8,6 +8,13 @@ PORT="${NEMOTRON_PORT:-8000}"
 MAX_LEN="${NEMOTRON_MAX_LEN:-262144}"
 PARSER_PLUGIN="${NEMOTRON_REASONING_PLUGIN:-nano_v3_reasoning_parser.py}"
 
+# RunPod's container disk (/) is tiny (~20G); the big volume is /workspace. The
+# model is tens of GB, so cache it on /workspace unless the caller set HF_HOME.
+if [[ -z "${HF_HOME:-}" && -d /workspace ]]; then
+  export HF_HOME=/workspace/hf
+  echo "HF_HOME defaulted to $HF_HOME (model cache on the large volume)"
+fi
+
 # The reasoning-parser plugin ships in the NVIDIA model repo. If it's not next to
 # this script, fetch it from the model card before serving (see README).
 if [[ ! -f "$PARSER_PLUGIN" ]]; then
